@@ -13,18 +13,6 @@ LIB_OBJS := $(patsubst src/%.c,$(BUILD)/obj/%.o,$(LIB_SRCS))
 EX_SRCS  := $(wildcard examples/*.c)
 EX_OBJS  := $(patsubst examples/%.c,$(BUILD)/examples/%.o,$(EX_SRCS))
 
-CC_VERSION   := $(shell $(CC) --version 2>/dev/null)
-CC_IS_CLANG  := $(findstring clang,$(CC_VERSION))
-
-ifneq (,$(CC_IS_CLANG))
-  OVERRIDE_FLAG := -Wno-initializer-overrides
-else
-  OVERRIDE_FLAG := -Wno-override-init -Wno-override-init-side-effects
-endif
-
-CFLAGS ?= -O2 -Wall -Wextra -fPIC -std=c11
-CFLAGS += $(OVERRIDE_FLAG)
-
 all: $(LIB)
 
 $(LIB): $(LIB_OBJS)
