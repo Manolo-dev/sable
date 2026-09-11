@@ -1,0 +1,21 @@
+# Artefacts de build
+build/
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+
+# Exemples / sorties de test
+out.ppm
+*.ppm
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
