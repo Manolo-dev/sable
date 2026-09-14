@@ -52,4 +52,4 @@ Sable est distribué sous la licence GPL-3.0-only. Voir le fichier [LICENSE](LIC
 
 Merci à tous les contributeurs et aux communautés open-source dont les idées ont nourri ce projet.
 
-Et -- étonnamment -- merci à Nvidia, à Google, ainsi qu'aux équipes de SDL, d'OpenGL, d'OpenCL et de Vulkan : utiliser vos outils, faire la tuyauterie pour chaque système, comprendre vos infamies, tout cela m'a paru plus complexe que de tout recréer de zéro. Il m'a semblé plus simple de réinventer la roue depuis le début que d'utiliser vos roues carrées (je suis méchant, désolé. J'aimer juste pas le boilerplate).
+Et -- étonnamment -- merci à Nvidia, à Google, ainsi qu'aux équipes de SDL, d'OpenGL, d'OpenCL et de Vulkan : utiliser vos outils, faire la tuyauterie pour chaque système, comprendre vos infamies, tout cela m'a paru plus complexe que de tout recréer de zéro. Il m'a semblé plus simple de réinventer la roue depuis le début que d'utiliser vos roues carrées (je suis méchant, désolé. Je n'aime juste pas le boilerplate).
