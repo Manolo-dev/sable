@@ -1,6 +1,6 @@
 #include <sable/mat.h>
 
-inline void mat_apply(Mat m, float*  x, float*  y) {
+void mat_apply(Mat m, float*  x, float*  y) {
     if (m.type == M2) {
         float nx = m.m2.a * *x + m.m2.b * *y;
         float ny = m.m2.c * *x + m.m2.d * *y;
@@ -16,7 +16,7 @@ inline void mat_apply(Mat m, float*  x, float*  y) {
     }
 }
 
-inline Mat mat_inverse(Mat m) {
+Mat mat_inverse(Mat m) {
     if (m.type == M2) {
         float det = m.m2.a*m.m2.d - m.m2.b*m.m2.c;
         float id = (det != 0.0f) ? 1.0f/det : 0.0f;
@@ -50,7 +50,7 @@ inline Mat mat_inverse(Mat m) {
     }};
 }
 
-inline Mat mat_mul(Mat m, Mat n) {
+Mat mat_mul(Mat m, Mat n) {
     if (m.type == M2 && n.type == M2) {
         return (Mat){ .type = M2, .m2 = {
             .a = m.m2.a*n.m2.a + m.m2.b*n.m2.c,
