@@ -1,8 +1,6 @@
 #pragma once
 #include <stdbool.h>
-#include <stdlib.h>
 #include <stdint.h>
-#include <math.h>
 #include <sable/util.h>
 #include <sable/mat.h>
 #include <sable/style.h>

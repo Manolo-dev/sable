@@ -1,4 +1,7 @@
 #include <sable/shapes.h>
+#include <float.h>
+#include <stdlib.h>
+#include <math.h>
 
 // Rectangle
 typedef struct { Unit w, h; } RectData;

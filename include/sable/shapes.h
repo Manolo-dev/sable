@@ -1,6 +1,5 @@
 #pragma once
 #include <sable/div.h>
-#include <float.h>
 
 Shape make_rect(Unit width, Unit height);
 Shape make_circle(Unit radius);

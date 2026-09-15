@@ -1,4 +1,6 @@
 #include <sable/div.h>
+#include <stdlib.h>
+#include <math.h>
 
 static int g_screen_w = 0;
 static int g_screen_h = 0;

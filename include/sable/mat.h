@@ -1,5 +1,4 @@
 #pragma once
-#include <math.h>
 
 typedef struct {
     enum { M2, M3 } type;

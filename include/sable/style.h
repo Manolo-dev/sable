@@ -1,7 +1,6 @@
 #pragma once
 #include <sable/util.h>
 #include <sable/mat.h>
-#include <sable/div.h>
 
 #define STYLE_INIT                 \
     (Style){                       \

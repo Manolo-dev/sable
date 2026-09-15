@@ -1,4 +1,5 @@
 #include <sable/mat.h>
+#include <math.h>
 
 void mat_apply(Mat m, float*  x, float*  y) {
     if (m.type == M2) {
