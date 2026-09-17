@@ -5,11 +5,16 @@
 #include <sable/style.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include "sarg.h"
 
 #define PI 3.14159265358979323846
 
 static int g_screen_w = 2048;
 static int g_screen_h = 2048;
+static const char *g_output_path = "out.ppm";
+static const char *g_input_path = "";
 
 static Div domino, bar, cc, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12;
 
@@ -78,7 +83,35 @@ static void build_scene(float g_angle) {
     div_add_child(&domino, &c12);
 }
 
-int main(void) {
+static void on_size  (char **v) { g_screen_w = g_screen_h = atoi(v[0]); }
+static void on_sizes (char **v) { g_screen_w = atoi(v[0]); g_screen_h = atoi(v[1]); }
+static void on_output(char **v) { g_output_path = v[0]; }
+static void on_input (char *v)  { g_input_path  = v; }
+
+int main(int argc, char **argv) {
+    Entry args[] = {
+        { .kind = OPT, .o = { "-s", "--size",   1, on_size,   NULL, "Largeur et hauteur identiques" } },
+        { .kind = OPT, .o = { "-S", "--sizes",  2, on_sizes,  NULL, "Largeur et hauteur de l'écran" } },
+        { .kind = OPT, .o = { "-o", "--output", 1, on_output, NULL, "Chemin/nom du fichier de sortie" } },
+        { .kind = ARG, .p = { "FICHIER_ENTRÉE", on_input, "Fichier source à traiter" } },
+    };
+    Entries entries = {
+        .args     = args,
+        .argc     = sizeof(args) / sizeof(args[0]),
+        .descript = "Programme de démonstration",
+    };
+
+    int r = args_parse(argc, argv, &entries);
+    if (r == 1) return 0;
+    if (r < 0)  return 1;
+
+    if (!g_output_path) {
+        fprintf(stderr, "\033[31;1mErreur\033[0m : fichier de sortie obligatoire.\n");
+        return 1;
+    }
+
+    printf("\033[32;1m-w %d -h %d -o %s\033[0m\n", g_screen_w, g_screen_h, g_output_path);
+
     uint32_t *pixels = calloc((size_t)g_screen_w * g_screen_h, 4);
     Buffer buf = { .bits = pixels, .width = g_screen_w, .height = g_screen_h, .stride = g_screen_w };
 
@@ -87,10 +120,10 @@ int main(void) {
     Div *divs[] = { &domino };
     render_frame(&buf, 1, divs, 0xFF202020);
 
-    FILE *f = fopen("out.ppm", "wb");
+    FILE *f = fopen(g_output_path, "wb");
     fprintf(f, "P6\n%d %d\n255\n", g_screen_w, g_screen_h);
     for (int i = 0; i < g_screen_w * g_screen_h; i++) {
-        uint32_t p = pixels[i]; // format interne: r | g<<8 | b<<16 | a<<24
+        uint32_t p = pixels[i];
         fputc((p)      & 0xFF, f);
         fputc((p >> 8) & 0xFF, f);
         fputc((p >> 16)& 0xFF, f);
