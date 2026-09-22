@@ -1,44 +1,42 @@
 # Sable
 
-Sable est une petite bibliothèque graphique portable en C pur. Elle dessine une arborescence de `Div` dans un simple buffer de pixels, sans dépendance à une plateforme ni à une bibliothèque graphique.
+Sable est une petite bibliothèque/API graphique en C pur. Elle dessine une arborescence de `Div` dans un buffer de pixels, sans dépendance à une plateforme ni à une bibliothèque graphique.
 
 ## Fonctionnalités principales
 
-- **Arbre de `Div`** à la manière du DOM : chaque élément possède un style, une
+- **Arbre de `Div`** à la manière du DOM HTML/JS : chaque élément possède un style, une
   position, des enfants, et se compose récursivement.
+- **Rendu dans un `Buffer`** : un pointeur de pixels, une largeur, une hauteur,
+  un stride.
 - **Formes définies par champ de distance signé (SDF)** : rectangle, cercle,
   squircle (courbe de Lamé).
 - **Anti-aliasing** par sous-échantillonnage.
 - **Transformations 2D** : rotation, translation, échelle, et projection
   perspective (`rotate_x`, `rotate_y`).
-- **Ancrages** (`LEFT_TOP`, `CENTER`, `RIGHT_BOTTOM`...), opacité, composition
-  alpha.
-- **Rendu dans un `Buffer`** : un pointeur de pixels, une largeur, une hauteur,
-  un stride. C'est tout.
 - **Tests de collision** (`div_hit`, `div_signed_distance`) et callbacks
   `onclick`.
 
 ### Fonctionnalités futures
 
-- Formes supplémentaires : polygones, étoiles, chemins arbitraires.
-- Clipping et scroll.
+- Formes supplémentaires : image, polygones, étoiles, chemins arbitraires.
+- Clipping, scroll et zoom.
 - Rendu d'image.
 - Rendu de texte via polices SDF.
 - Ombres, bordures, dégradés.
+- Rendu SVG.
 
 ### Fonctionnalités secondaires
 
 - Cache de rendu pour les sous-arbres statiques.
 - Groupes et compositions.
-- Transitions et easing sur les propriétés de style.
 
 ## Portabilité
 
-Sable ne connaît que le C standard (`stdint.h`, `math.h`) et un buffer de pixels. Elle tourne sur Android (via `NativeActivity`), sur Linux (framebuffer, X11, Wayland...), et n'importe où ailleurs dès qu'on sait remplir un `Buffer`. Aucun appel système, aucune allocation globale, aucune dépendance externe.
+Sable ne connaît que le C standard (`stdint.h`, `math.h`) et un buffer de pixels. Elle tourne sur Android (via `NativeActivity`), sur Linux (framebuffer, X11, Wayland...), et n'importe où ailleurs dès que l'on peut remplir un `Buffer`. Il sert notamment à créer des images, par exemple `ppm`. Aucun appel système, aucune allocation globale, aucune dépendance externe.
 
 ## Philosophie du projet
 
-Sable part d'une idée simple : dessiner une interface ne devrait pas exiger une stack graphique massive. Un buffer de pixels et quelques primitives claires suffisent. La bibliothèque reste petite, lisible, sans dépendance, et se laisse embarquer n'importe où -- y compris là où on ne l'attend pas.
+Sable part d'une idée simple : dessiner une interface ne devrait pas exiger une stack graphique massive. Un buffer de pixels et quelques primitives claires suffisent. La bibliothèque reste petite, lisible, sans dépendance, et se laisse embarquer n'importe où.
 
 ## Contribution
 
